@@ -1,0 +1,22 @@
+##### INICIAR O PROJETO #####
+cd Projeto-Angular
+cd Diamont-Manage
+ng serve
+
+
+##### CRIAR O COMPONENTE #####
+cd Projeto-Angular
+cd Diamont-Manage
+ng generate component Nome_do_Componente
+
+##### DEPLOY NO VERCEL #####
+
+ir para pasta antes do src
+
+vercel login
+
+vercel --prod
+
+## Executar Json
+
+json-server --watch db.json
