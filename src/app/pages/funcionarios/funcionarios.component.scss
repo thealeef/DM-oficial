@@ -1,0 +1,67 @@
+.containers {
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 10px 0 10px 0;
+}
+
+.card {
+    width: 200px;
+    height: 250px;
+    margin: 10px 0 10px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+
+}
+
+.containersBtn {
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    margin: 15px 0 10px 0;
+    padding: 10px;
+}
+
+.btn {
+    margin: 5px;
+}
+
+.btns {
+    margin-right: 10px;
+}
+
+.cadastro {
+    margin: 15px 0 10px 0;
+    border: solid 1px #cdcdcd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.cadastro h1 {
+    margin: 5px 0 5px 0;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: row;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.camposInput {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.campo {
+    margin: 5px 0 5px 0;
+}

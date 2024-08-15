@@ -1,0 +1,38 @@
+* {
+    margin: 5px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    transition: all 1s;
+}
+
+.itensMenu {
+    display: flex;
+    height: 30px;
+}
+
+.itensMenu:hover {
+    background-color: #cdcdcd;
+    transition: all 0.5s;
+    margin: 0;
+    height: 55px;
+}
+
+/*Tamanho da Logo*/
+.material-symbols-outlined {
+    font-size: 35px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+}
+
+.rotasMenu {
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,31 @@
+.corpo {
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.corpo .material-symbols-outlined {
+    margin: 30px 0 120px 0;
+    font-size: 100px;
+    color: #cdcdcd;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.corpo .material-symbols-outlined:hover {
+    color: black;
+    transition: all 1s;
+}
+
+.titulo {
+    margin: 50px 0 120px 0;
+}
+
+.titulo h1 {
+    font-size: 50px;
+    margin: 0 0 20px 0;
+}
+
+.titulo h4 {
+    margin: 0 0 0 0;
+}

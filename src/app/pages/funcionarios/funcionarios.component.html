@@ -1,0 +1,40 @@
+<div class="containers">
+    <div *ngFor="let funcionario of listaFuncionarios" class="card">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <p> {{funcionario.id}} </p>
+        <p> {{funcionario.nomeCompleto}} </p>
+        <p> {{funcionario.nomeMae}} </p>
+    </div>
+</div>
+<div class="containersBtn">
+    <button class="btn" (click)="abrirCadastro()">Criar</button>
+    <button class="btn" (click)="abrirEditar()">Editar</button>
+    <button class="btn" (click)="abrirDeletar()">Deletar</button>
+</div>
+
+<div *ngIf="criarCadastroBoleana" class="cadastro">
+    <h1>Cadastro</h1>
+    <div class="formularios">
+        <form [formGroup]="funcionarioForm" #formDit="ngForm" class="formulario">
+            <div class="campos">
+                <label class="campo">ID</label>
+                <label class="campo">Nome Completo</label>
+                <label class="campo">Nome da Mãe</label>
+            </div>
+            <div class="camposInput">
+                <input class="campo" type="text" formControlName="id" placeholder="Insira o ID">
+                <input class="campo" type="text" formControlName="nomeCompleto" placeholder="Insira o Nome Completo">
+                <input class="campo" type="text" formControlName="nomeMae" placeholder="Insira o Nome da Mãe">
+            </div>
+        </form>
+    </div>
+    <div>
+        <button class="btns" (click)="cadastraFuncionario()">Enviar</button>
+        <button class="btns" (click)="abrirCadastro()">Fechar</button>
+    </div>
+</div>
+
+<div *ngIf="editarCadastroBoleana">Tela de Edição Aberto</div>
+
+<div *ngIf="deletaCadastroBoleana">Deletado com sucesso!</div>
