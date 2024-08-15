@@ -22,5 +22,6 @@ export class ApiServiceService {
 
   CriaFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
     return this.http.post<Funcionario[]>(this.baseURL, funcionario);
+    //Teste Alef
   }
 }
