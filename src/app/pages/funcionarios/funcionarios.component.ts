@@ -82,25 +82,11 @@ export class FuncionariosComponent implements OnInit {
     }
   }
 
-  cadastraFuncionario() {
-    let vlr = 0
-    let dados = this.funcionarioForm.value
+  validaCamposFuncionario() {
 
-    for (let x in dados) {
-      if (dados[x] != undefined && dados[x] != '' && dados[x] != ' ') {
-        //console.log(String(dados[x]).trim())
-        vlr += 1
-      }
-    }
-
-    if (vlr == Object.keys(dados).length) {
-
-      this.enviar.emit(this.funcionarioForm.value)
-      this.cardFuncionario(this.funcionarioForm.value)
-    } else {
-      alert('Por favor, preencha todos os campos!')
-    }
-
+    //Precisa validar os campos preenchidos
+    this.cardFuncionario(this.funcionarioForm.value)
+    //alert('Por favor, preencha todos os campos!')
   }
 
   cardFuncionario(funcionario: any) {
