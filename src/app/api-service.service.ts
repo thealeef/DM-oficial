@@ -31,11 +31,17 @@ export class ApiServiceService {
   CriaFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
 
     const headers = new HttpHeaders({
-      'X-Requested-With': 'XMLHttpRequest'
+      'X-Requested-With': 'XMLHttpRequest',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+      'Access-Control-Allow-Headers':
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+
     });
 
-    return this.http.post<Funcionario[]>(this.baseURL, funcionario,
-      { headers: headers })
+
+    return this.http.post<Funcionario[]>(this.baseURL, funcionario)
     //Teste Alef
   }
 }
