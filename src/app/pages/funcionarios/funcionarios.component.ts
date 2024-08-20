@@ -30,12 +30,12 @@ export class FuncionariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.ChamaFuncionarios().subscribe(funcionarios => {
-      this.listaFuncionarios = funcionarios.funcionarios
+      this.listaFuncionarios = funcionarios
     });
 
     console.log(this.listaFuncionarios)
 
-    //Montando o Form
+    //Montando o Form//
     this.funcionarioForm = new FormGroup({
       id: new FormControl(),
       nomeCompleto: new FormControl(),
