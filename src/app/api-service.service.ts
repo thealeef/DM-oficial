@@ -10,6 +10,7 @@ import { catchError, Observable } from 'rxjs';
 export class ApiServiceService {
 
   baseURL: string = "https://api-flask-python.vercel.app/funcionarios";
+  //baseURL: string = 'http://127.0.0.1:5000/funcionarios'
 
   constructor(private http: HttpClient) { }
 
