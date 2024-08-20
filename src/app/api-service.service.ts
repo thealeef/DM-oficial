@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Funcionario, FuncionariosModel, } from './models/funcionarios.model';
 import { FormGroup } from '@angular/forms';
 import { catchError, Observable } from 'rxjs';
@@ -15,13 +15,26 @@ export class ApiServiceService {
 
   public novoProdutoForm: FormGroup | undefined;
 
-
   ChamaFuncionarios() {
-    return this.http.get<FuncionariosModel>(this.baseURL)
+
+    const headers = new HttpHeaders({
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+    return this.http.get('https://api-flask-python.vercel.app/funcionarios',
+      { headers: headers }
+    );
+
+    //return this.http.get<FuncionariosModel>(this.baseURL)
   }
 
   CriaFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
-    return this.http.post<Funcionario[]>(this.baseURL, funcionario);
+
+    const headers = new HttpHeaders({
+      'X-Requested-With': 'XMLHttpRequest'
+    });
+
+    return this.http.post<Funcionario[]>(this.baseURL, funcionario,
+      { headers: headers })
     //Teste Alef
   }
 }
