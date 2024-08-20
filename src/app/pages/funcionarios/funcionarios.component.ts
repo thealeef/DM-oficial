@@ -28,7 +28,8 @@ export class FuncionariosComponent implements OnInit {
 
   constructor(private service: ApiServiceService) { };
 
-  ngOnInit(): void {
+  ngOnInit() {
+
     this.service.ChamaFuncionarios().subscribe(funcionarios => {
       this.listaFuncionarios = funcionarios.funcionarios
     });
