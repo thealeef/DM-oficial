@@ -20,7 +20,7 @@ export class ApiServiceService {
     const headers = new HttpHeaders({
       'X-Requested-With': 'XMLHttpRequest'
     });
-    return this.http.get('https://api-flask-python.vercel.app/funcionarios',
+    return this.http.get<FuncionariosModel>(this.baseURL,
       { headers: headers }
     );
 
