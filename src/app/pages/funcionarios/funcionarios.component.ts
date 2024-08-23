@@ -1,7 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ApiServiceService } from '../../api-service.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { EventEmitter } from 'events';
 import { Funcionario, FuncionariosModel } from '../../models/funcionarios.model';
 
 @Component({
@@ -11,8 +10,6 @@ import { Funcionario, FuncionariosModel } from '../../models/funcionarios.model'
 })
 
 export class FuncionariosComponent implements OnInit {
-
-  @Output() enviar = new EventEmitter<FuncionariosModel>();
 
   funcionarioForm!: FormGroup
 
@@ -26,21 +23,20 @@ export class FuncionariosComponent implements OnInit {
   deletaCadastroBoleana = false;
   respDeletaCadastroBoleana = false;
 
+  selFuncionario: Funcionario | undefined;
+
   constructor(private service: ApiServiceService) { };
 
   ngOnInit() {
 
-    this.service.ChamaFuncionarios().subscribe(funcionarios => {
-      this.listaFuncionarios = funcionarios
-    });
+    this.atualiza()
 
     //Montando o Form
     this.funcionarioForm = new FormGroup({
-      id: new FormControl(),
-      nomeCompleto: new FormControl(),
-      nomeMae: new FormControl()
+      id: new FormControl('0', [Validators.required]),
+      nomeCompleto: new FormControl('', [Validators.required]),
+      nomeMae: new FormControl('', [Validators.required])
     })
-
   }
 
   abrirCadastro() {
@@ -56,43 +52,50 @@ export class FuncionariosComponent implements OnInit {
     }
   }
 
-  abrirEditar() {
-    if (this.editarCadastroBoleana == false) {
-      this.editarCadastroBoleana = true
-      this.criarCadastroBoleana = false
-      this.deletaCadastroBoleana = false;
-    } else {
-      this.editarCadastroBoleana = false
-    }
-  }
+  //abrirDeletar() {
+  //  this.respDeletaCadastroBoleana = confirm("Deseja deletar?")
 
-  abrirDeletar() {
-    this.respDeletaCadastroBoleana = confirm("Deseja deletar?")
+  //if (this.respDeletaCadastroBoleana) {
+  //  this.deletaCadastroBoleana = true;
+  //  this.criarCadastroBoleana = false
+  //  this.editarCadastroBoleana = false
 
-    if (this.respDeletaCadastroBoleana) {
-      this.deletaCadastroBoleana = true;
-      this.criarCadastroBoleana = false
-      this.editarCadastroBoleana = false
+  //  alert('Deletado com Sucesso!')
+  //} else {
+  //  this.deletaCadastroBoleana = false;
+  //  }
+  //}
 
-      alert('Deletado com Sucesso!')
-    } else {
-      this.deletaCadastroBoleana = false;
-    }
-  }
+  atualiza() {
+    this.service.ChamaFuncionarios().subscribe(dados => {
+      this.listaFuncionarios = dados
+    });
+  };
 
-  validaCamposFuncionario() {
+  addFuncionario(funcionario: any) {
+    //Chamada do service e passando os dados para Lista Funcionarios
+    this.service.AddFuncionario(funcionario).subscribe((dados) => {
+      this.listaFuncionarios = dados
+    });
 
-    //Precisa validar os campos preenchidos
-    this.cardFuncionario(this.funcionarioForm.value)
-    //alert('Por favor, preencha todos os campos!')
-  }
+    alert('Funcionário criado com Sucesso!')
+    this.criarCadastroBoleana = false
 
-  cardFuncionario(funcionario: any) {
+    this.atualiza()
 
-    //Adicionando o card na tela
-    this.listaFuncionarios.push(funcionario)
+    //Reseta o FormGroup após salvar 
+    this.funcionarioForm.reset()
+  };
 
-    this.service.CriaFuncionario(funcionario).subscribe(func => this.recebeFuncionario = funcionario)
+  editFuncionario() {
+    console.log('Chamou! EDIT')
+  };
 
-  }
+  delFuncionario(funcionario: any) {
+    console.log('Chamou! DELETE')
+    this.service.DelFuncionario(funcionario).subscribe((dados) => {
+      console.log(dados)
+      this.listaFuncionarios = dados
+    });
+  };
 }

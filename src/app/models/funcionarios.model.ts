@@ -3,7 +3,7 @@ export interface FuncionariosModel {
 }
 
 export interface Funcionario {
-    id: number;
+    id: string;
     nomeCompleto: string;
     nomeMae: string;
 }

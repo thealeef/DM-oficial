@@ -1,22 +1,22 @@
-<div class="containers">
-    <div *ngFor="let funcionario of listaFuncionarios" class="card">
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <p> {{funcionario.id}} </p>
-        <p> {{funcionario.nomeCompleto}} </p>
-        <p> {{funcionario.nomeMae}} </p>
-    </div>
-</div>
 <div class="containersBtn">
     <button class="btn" (click)="abrirCadastro()">Criar</button>
-    <button class="btn" (click)="abrirEditar()">Editar</button>
-    <button class="btn" (click)="abrirDeletar()">Deletar</button>
+    <button class="btn" routerLink="/">Voltar</button>
 </div>
-
+<div *ngIf="!criarCadastroBoleana" class="containers" id="cards">
+    <div *ngFor="let funcionario of listaFuncionarios" id="card" class="card">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <label> {{funcionario.id}} </label>
+        <label> {{funcionario.nomeCompleto}} </label>
+        <label> {{funcionario.nomeMae}} </label>
+        <button class="btn" (click)="editFuncionario()">Editar</button>
+        <button class="btn" (click)="delFuncionario(funcionario)">Deletar</button>
+    </div>
+</div>
 <div *ngIf="criarCadastroBoleana" class="cadastro">
     <h1>Cadastro</h1>
     <div class="formularios">
-        <form [formGroup]="funcionarioForm" #formDit="ngForm" class="formulario">
+        <form [formGroup]="funcionarioForm" class="formulario">
             <div class="campos">
                 <label class="campo">ID</label>
                 <label class="campo">Nome Completo</label>
@@ -30,7 +30,8 @@
         </form>
     </div>
     <div>
-        <button class="btns" (click)="validaCamposFuncionario()">Enviar</button>
+        <button class="btns" (click)="addFuncionario(this.funcionarioForm.value)"
+            [disabled]="!funcionarioForm.valid">Enviar</button>
         <button class="btns" (click)="abrirCadastro()">Fechar</button>
     </div>
 </div>
