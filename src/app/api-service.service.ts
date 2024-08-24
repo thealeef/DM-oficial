@@ -24,7 +24,7 @@ export class ApiServiceService {
     return this.http.post<Funcionario[]>(this.baseURL, funcionario)
   }
 
-  DelFuncionario(funcionario: any): Observable<Funcionario[]> {
+  DelFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
     console.log(funcionario)
 
     return this.http.delete<Funcionario[]>(this.baseURL)
