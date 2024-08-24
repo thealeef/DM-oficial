@@ -10,8 +10,8 @@ import { json } from 'stream/consumers';
 })
 export class ApiServiceService {
 
-  //private baseURL: string = "https://flask-api-sage.vercel.app/funcionarios";
-  private baseURL: string = 'http://127.0.0.1:5000/funcionarios'
+  private baseURL: string = "https://flask-api-sage.vercel.app/funcionarios";
+  //private baseURL: string = 'http://127.0.0.1:5000/funcionarios'
 
   constructor(private http: HttpClient) { }
 
