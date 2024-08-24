@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Funcionario, FuncionariosModel, } from './models/funcionarios.model';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,10 @@ export class ApiServiceService {
 
   private baseURL: string = "https://flask-api-sage.vercel.app/funcionarios";
   //private baseURL: string = 'http://127.0.0.1:5000/funcionarios'
+
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +30,6 @@ export class ApiServiceService {
 
   DelFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
     console.log(funcionario)
-
     return this.http.delete<Funcionario[]>(this.baseURL)
   }
 }

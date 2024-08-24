@@ -82,8 +82,7 @@ export class FuncionariosComponent implements OnInit {
 
     console.log(funcionario)
     this.service.DelFuncionario(funcionario).subscribe(dados => {
-      console.log(dados)
-      //this.listaFuncionarios = dados
+      this.listaFuncionarios = dados
     });
   };
 }

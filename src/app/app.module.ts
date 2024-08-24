@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { GestaoComponent } from './pages/gestao/gestao.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
@@ -22,11 +22,9 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
     ReactiveFormsModule,
   ],
   providers: [
-    HttpClientModule,
     HttpClient,
     provideHttpClient(withFetch()),
     provideClientHydration(),
