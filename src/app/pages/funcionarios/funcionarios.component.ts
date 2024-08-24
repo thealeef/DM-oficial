@@ -79,9 +79,11 @@ export class FuncionariosComponent implements OnInit {
   };
 
   delFuncionario(funcionario: any) {
-    this.service.DelFuncionario(funcionario).subscribe((dados) => {
+
+    console.log(funcionario)
+    this.service.DelFuncionario(funcionario).subscribe(dados => {
       console.log(dados)
-      this.listaFuncionarios = dados
+      //this.listaFuncionarios = dados
     });
   };
 }
