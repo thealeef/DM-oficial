@@ -52,20 +52,6 @@ export class FuncionariosComponent implements OnInit {
     }
   }
 
-  //abrirDeletar() {
-  //  this.respDeletaCadastroBoleana = confirm("Deseja deletar?")
-
-  //if (this.respDeletaCadastroBoleana) {
-  //  this.deletaCadastroBoleana = true;
-  //  this.criarCadastroBoleana = false
-  //  this.editarCadastroBoleana = false
-
-  //  alert('Deletado com Sucesso!')
-  //} else {
-  //  this.deletaCadastroBoleana = false;
-  //  }
-  //}
-
   atualiza() {
     this.service.ChamaFuncionarios().subscribe(dados => {
       this.listaFuncionarios = dados
@@ -75,6 +61,7 @@ export class FuncionariosComponent implements OnInit {
   addFuncionario(funcionario: any) {
     //Chamada do service e passando os dados para Lista Funcionarios
     this.service.AddFuncionario(funcionario).subscribe((dados) => {
+      console.log(dados)
       this.listaFuncionarios = dados
     });
 
@@ -92,7 +79,6 @@ export class FuncionariosComponent implements OnInit {
   };
 
   delFuncionario(funcionario: any) {
-    console.log('Chamou! DELETE')
     this.service.DelFuncionario(funcionario).subscribe((dados) => {
       console.log(dados)
       this.listaFuncionarios = dados
