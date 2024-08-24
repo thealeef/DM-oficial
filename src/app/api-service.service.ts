@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Funcionario, FuncionariosModel, } from './models/funcionarios.model';
 import { FormGroup } from '@angular/forms';
-import { catchError, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,15 @@ export class ApiServiceService {
     return this.http.post<Funcionario[]>(this.baseURL, funcionario)
   }
 
-  DelFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
+
+
+  DelFuncionario(funcionario: any): Observable<any> {
     console.log(funcionario)
-    return this.http.delete<Funcionario[]>(this.baseURL)
+    return this.http.delete<any>(this.baseURL, this.httpOptions)
   }
+
+  // DelFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
+  //   console.log(funcionario)
+  //   return this.http.delete<Funcionario[]>(this.baseURL, this.httpOptions)
+  // }
 }
