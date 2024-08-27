@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Funcionario, FuncionariosModel, } from './models/funcionarios.model';
-import { FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,34 +7,33 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceService {
 
-  private baseURL: string = "https://flask-api-sage.vercel.app/funcionarios";
-  //private baseURL: string = 'http://127.0.0.1:5000/funcionarios'
-
-  private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  //private apiURL: string = "https://flask-api-sage.vercel.app/funcionarios";
+  private apiUrl: string = 'http://127.0.0.1:5000/funcionarios'
 
   constructor(private http: HttpClient) { }
 
-  public novoProdutoForm: FormGroup | undefined;
-
-  ChamaFuncionarios() {
-    return this.http.get<FuncionariosModel>(this.baseURL);
+  // Método GET para obter a lista de usuários
+  chamaFuncionarios(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  AddFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
-    return this.http.post<Funcionario[]>(this.baseURL, funcionario)
+  // Método GET para obter um funcionário específico por ID
+  chamaFuncionario(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<any>(url);
   }
 
-
-
-  DelFuncionario(funcionario: any): Observable<any> {
+  // Método POST para adicionar um funcionário
+  addFuncionario(funcionario: any): Observable<any> {
     console.log(funcionario)
-    return this.http.delete<any>(this.baseURL, this.httpOptions)
+    const url = `${this.apiUrl}`;
+    return this.http.post<any>(url, funcionario);
   }
 
-  // DelFuncionario(funcionario: Funcionario): Observable<Funcionario[]> {
-  //   console.log(funcionario)
-  //   return this.http.delete<Funcionario[]>(this.baseURL, this.httpOptions)
-  // }
+  // Método DELETE para deletar um usuário pelo ID
+  delFuncionario(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url);
+  }
 }
+

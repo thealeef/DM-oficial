@@ -3,14 +3,14 @@
     <button class="btn" routerLink="/">Voltar</button>
 </div>
 <div *ngIf="!criarCadastroBoleana" class="containers" id="cards">
-    <div *ngFor="let funcionario of listaFuncionarios" id="card" class="card">
+    <div *ngFor="let funcionario of funcionarios" id="card" class="card">
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <label> {{funcionario.id}} </label>
         <label> {{funcionario.nomeCompleto}} </label>
         <label> {{funcionario.nomeMae}} </label>
-        <button class="btn" (click)="editFuncionario()">Editar</button>
-        <button class="btn" (click)="delFuncionario(funcionario)">Deletar</button>
+        <button class="btn">Editar</button>
+        <button class="btn" (click)="delFuncionario(funcionario.id)">Deletar</button>
     </div>
 </div>
 <div *ngIf="criarCadastroBoleana" class="cadastro">
@@ -18,12 +18,10 @@
     <div class="formularios">
         <form [formGroup]="funcionarioForm" class="formulario">
             <div class="campos">
-                <label class="campo">ID</label>
                 <label class="campo">Nome Completo</label>
                 <label class="campo">Nome da Mãe</label>
             </div>
             <div class="camposInput">
-                <input class="campo" type="text" formControlName="id" placeholder="Insira o ID">
                 <input class="campo" type="text" formControlName="nomeCompleto" placeholder="Insira o Nome Completo">
                 <input class="campo" type="text" formControlName="nomeMae" placeholder="Insira o Nome da Mãe">
             </div>

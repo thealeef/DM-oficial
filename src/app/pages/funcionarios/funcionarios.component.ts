@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../../api-service.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Funcionario, FuncionariosModel } from '../../models/funcionarios.model';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-funcionarios',
@@ -13,27 +12,22 @@ export class FuncionariosComponent implements OnInit {
 
   funcionarioForm!: FormGroup
 
-  funcionarios: FuncionariosModel | undefined;
-  listaFuncionarios: any;
-
-  recebeFuncionario: Funcionario | undefined;
+  funcionarios: any[] = [];
+  funcionario: any;
 
   criarCadastroBoleana = false;
   editarCadastroBoleana = false;
   deletaCadastroBoleana = false;
   respDeletaCadastroBoleana = false;
 
-  selFuncionario: Funcionario | undefined;
-
   constructor(private service: ApiServiceService) { };
 
   ngOnInit() {
 
-    this.atualiza()
+    this.carregaFuncionarios()
 
     //Montando o Form
     this.funcionarioForm = new FormGroup({
-      id: new FormControl('0', [Validators.required]),
       nomeCompleto: new FormControl('', [Validators.required]),
       nomeMae: new FormControl('', [Validators.required])
     })
@@ -45,44 +39,45 @@ export class FuncionariosComponent implements OnInit {
       this.editarCadastroBoleana = false
       this.deletaCadastroBoleana = false
 
-      //this.cadastraFuncionario()
-
     } else {
       this.criarCadastroBoleana = false
     }
   }
 
-  atualiza() {
-    this.service.ChamaFuncionarios().subscribe(dados => {
-      this.listaFuncionarios = dados
+  carregaFuncionarios() {
+    this.service.chamaFuncionarios().subscribe({
+      next: (data) => this.funcionarios = data,
+      error: (error) => console.error('Erro ao carregar usuários', error)
     });
-  };
+  }
+
+  carregarFuncionario(id: number): void {
+    this.service.chamaFuncionario(id).subscribe({
+      next: (data) => this.funcionario = data,
+      error: (error) => console.error('Erro ao carregar usuário', error)
+    });
+  }
 
   addFuncionario(funcionario: any) {
-    //Chamada do service e passando os dados para Lista Funcionarios
-    this.service.AddFuncionario(funcionario).subscribe((dados) => {
-      console.log(dados)
-      this.listaFuncionarios = dados
+    this.service.addFuncionario(funcionario).subscribe({
+      next: (response) => {
+        console.log('Usuário adicionado', response);
+        this.carregaFuncionarios();  // Atualiza a lista de usuários após adicionar
+        alert('Funcionario cadastrado com sucesso!') //Mensagem de sucesso
+        this.criarCadastroBoleana = false
+        this.funcionarioForm.reset();  // Reseta o formulário
+      },
+      error: (error: any) => console.error('Erro ao adicionar usuário', error)
     });
+  }
 
-    alert('Funcionário criado com Sucesso!')
-    this.criarCadastroBoleana = false
-
-    this.atualiza()
-
-    //Reseta o FormGroup após salvar 
-    this.funcionarioForm.reset()
-  };
-
-  editFuncionario() {
-    console.log('Chamou! EDIT')
-  };
-
-  delFuncionario(funcionario: any) {
-
-    this.service.DelFuncionario(funcionario).subscribe(dados => {
-      console.log(dados)
-      this.listaFuncionarios = dados
+  delFuncionario(id: number) {
+    this.service.delFuncionario(id).subscribe({
+      next: (response) => {
+        console.log('Usuário deletado', response);
+        this.carregaFuncionarios();  // Atualiza a lista de usuários após deletar
+      },
+      error: (error) => console.error('Erro ao deletar usuário', error)
     });
-  };
+  }
 }
