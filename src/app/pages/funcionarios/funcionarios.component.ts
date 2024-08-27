@@ -58,6 +58,7 @@ export class FuncionariosComponent implements OnInit {
     });
   }
 
+  //Adicionar Funcionario
   addFuncionario(funcionario: any) {
     this.service.addFuncionario(funcionario).subscribe({
       next: (response) => {
