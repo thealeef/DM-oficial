@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiServiceService {
 
-  apiUrl: string = "https://flask-api-sage.vercel.app/funcionarios";
-  //private apiUrl: string = 'http://127.0.0.1:5000/funcionarios'
+  //private apiUrl: string = "https://flask-api-sage.vercel.app/funcionarios";
+  private apiUrl: string = 'http://127.0.0.1:5000/funcionarios'
 
   constructor(private http: HttpClient) { }
 
@@ -28,6 +28,12 @@ export class ApiServiceService {
     console.log(funcionario)
     const url = `${this.apiUrl}`;
     return this.http.post<any>(url, funcionario);
+  }
+
+  //Metodo EDIT(PUT) para editar funcionário
+  editFuncionario(id: number, funcionario: any): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put(url, funcionario);
   }
 
   // Método DELETE para deletar um usuário pelo ID

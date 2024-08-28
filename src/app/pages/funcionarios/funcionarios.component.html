@@ -1,15 +1,16 @@
 <div class="containersBtn">
-    <button class="btn" (click)="abrirCadastro()">Criar</button>
+    <button class="btn" [disabled]="!btnCriar"
+        (click)="criarCadastroBoleana = true; cardsBoleana = false;">Criar</button>
     <button class="btn" routerLink="/">Voltar</button>
 </div>
-<div *ngIf="!criarCadastroBoleana" class="containers" id="cards">
+<div *ngIf="cardsBoleana" class="containers" id="cards">
     <div *ngFor="let funcionario of funcionarios" id="card" class="card">
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <label> {{funcionario.id}} </label>
         <label> {{funcionario.nomeCompleto}} </label>
         <label> {{funcionario.nomeMae}} </label>
-        <button class="btn">Editar</button>
+        <button class="btn" (click)="editaFuncionario(funcionario)">Editar</button>
         <button class="btn" (click)="delFuncionario(funcionario.id)">Deletar</button>
     </div>
 </div>
@@ -30,10 +31,28 @@
     <div>
         <button class="btns" (click)="addFuncionario(this.funcionarioForm.value)"
             [disabled]="!funcionarioForm.valid">Enviar</button>
-        <button class="btns" (click)="abrirCadastro()">Fechar</button>
+        <button class="btns" (click)="cardsBoleana = true; criarCadastroBoleana = false">Fechar</button>
     </div>
 </div>
 
-<div *ngIf="editarCadastroBoleana">Tela de Edição Aberto</div>
-
-<div *ngIf="deletaCadastroBoleana">Deletado com sucesso!</div>
+<div *ngIf="editarCadastroBoleana" class="cadastro">
+    <h1>Editar Cadastro</h1>
+    <div class="formularios">
+        <form [formGroup]="funcionarioForm" class="formulario">
+            <div class="campos">
+                <label class="campo">Nome Completo</label>
+                <label class="campo">Nome da Mãe</label>
+            </div>
+            <div class="camposInput">
+                <input class="campo" type="text" formControlName="nomeCompleto" placeholder="Insira o Nome Completo">
+                <input class="campo" type="text" formControlName="nomeMae" placeholder="Insira o Nome da Mãe">
+            </div>
+        </form>
+    </div>
+    <div>
+        <button class="btns" (click)="btnSalvar(this.funcionarioForm.value);"
+            [disabled]="!funcionarioForm.valid && !btnCriar">Salvar</button>
+        <button class="btns"
+            (click)="editarCadastroBoleana = false; cardsBoleana = true; carregaFuncionarios()">Fechar</button>
+    </div>
+</div>

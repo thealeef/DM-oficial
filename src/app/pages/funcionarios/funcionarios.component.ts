@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../../api-service.service';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-funcionarios',
@@ -15,70 +16,83 @@ export class FuncionariosComponent implements OnInit {
   funcionarios: any[] = [];
   funcionario: any;
 
+  cardsBoleana = false
+  btnCriar = true
   criarCadastroBoleana = false;
   editarCadastroBoleana = false;
-  deletaCadastroBoleana = false;
+
   respDeletaCadastroBoleana = false;
 
-  constructor(private service: ApiServiceService) { };
+  constructor(private service: ApiServiceService, private router: Router) { };
 
   ngOnInit() {
 
+    this.cardsBoleana = true
+
     this.carregaFuncionarios()
 
-    //Montando o Form
+    //Montando o Form ao iniciar porque se não gera erro
     this.funcionarioForm = new FormGroup({
       nomeCompleto: new FormControl('', [Validators.required]),
       nomeMae: new FormControl('', [Validators.required])
     })
   }
 
-  abrirCadastro() {
-    if (this.criarCadastroBoleana == false) {
-      this.criarCadastroBoleana = true
-      this.editarCadastroBoleana = false
-      this.deletaCadastroBoleana = false
-
-    } else {
-      this.criarCadastroBoleana = false
-    }
-  }
-
+  //Carrega lista de funcionários
   carregaFuncionarios() {
     this.service.chamaFuncionarios().subscribe({
-      next: (data) => this.funcionarios = data,
-      error: (error) => console.error('Erro ao carregar usuários', error)
+      next: (data) => this.funcionarios = data //Atualiza a lista de funcionários
     });
   }
 
-  carregarFuncionario(id: number): void {
-    this.service.chamaFuncionario(id).subscribe({
-      next: (data) => this.funcionario = data,
-      error: (error) => console.error('Erro ao carregar usuário', error)
-    });
-  }
-
-  //Adicionar Funcionario
+  //Adiciona funcionário 
   addFuncionario(funcionario: any) {
     this.service.addFuncionario(funcionario).subscribe({
       next: (response) => {
-        console.log('Usuário adicionado', response);
-        this.carregaFuncionarios();  // Atualiza a lista de usuários após adicionar
+        this.funcionarios = response //Atualiza a lista de funcionários
+
         alert('Funcionario cadastrado com sucesso!') //Mensagem de sucesso
+
         this.criarCadastroBoleana = false
         this.funcionarioForm.reset();  // Reseta o formulário
-      },
-      error: (error: any) => console.error('Erro ao adicionar usuário', error)
+      }
     });
   }
 
+  //Edita funcionário pelo ID
+  editaFuncionario(funcionario: any) {
+
+    this.editarCadastroBoleana = true
+    this.cardsBoleana = false
+    this.criarCadastroBoleana = false
+    this.btnCriar = false
+
+    //Montando o Form com as infos do funcionário
+    this.funcionarioForm = new FormGroup({
+      id: new FormControl(funcionario["id"], [Validators.required]),
+      nomeCompleto: new FormControl(funcionario["nomeCompleto"], [Validators.required]),
+      nomeMae: new FormControl(funcionario["nomeMae"], [Validators.required])
+    })
+  }
+
+  btnSalvar(funcionario: any) {
+
+    this.service.editFuncionario(funcionario.id, funcionario).subscribe(
+      response => this.carregaFuncionarios() //Atualiza a lista de funcionários
+    );
+
+    this.cardsBoleana = true
+    this.editarCadastroBoleana = false
+
+    this.funcionarioForm.reset();  // Reseta o formulário
+  }
+
+  //Deleta funcionario pelo ID
   delFuncionario(id: number) {
     this.service.delFuncionario(id).subscribe({
       next: (response) => {
-        console.log('Usuário deletado', response);
         this.carregaFuncionarios();  // Atualiza a lista de usuários após deletar
-      },
-      error: (error) => console.error('Erro ao deletar usuário', error)
+      }
     });
   }
 }
