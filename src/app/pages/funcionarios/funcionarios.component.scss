@@ -34,6 +34,11 @@
     border: solid 1px #cdcdcd;
 }
 
+.btn:hover {
+    background-color: #cdcdcd;
+    ;
+}
+
 .btns {
     margin-right: 10px;
 }
@@ -68,4 +73,37 @@
 
 .campo {
     margin: 5px 0 5px 0;
+}
+
+.material-symbols-outlined {
+    font-size: 60px;
+}
+
+.infoCards {
+    display: flex;
+    font-size: 12.5px !important;
+    padding: 50px 10px 0 10px;
+    margin-bottom: 55px;
+}
+
+.camposLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 15px;
+}
+
+.camposLabel>label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.camposDados {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.camposDados>label {
+    margin-bottom: 5px;
 }

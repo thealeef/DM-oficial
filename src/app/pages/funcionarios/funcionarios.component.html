@@ -5,11 +5,22 @@
 </div>
 <div *ngIf="cardsBoleana" class="containers" id="cards">
     <div *ngFor="let funcionario of funcionarios" id="card" class="card">
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <label> {{funcionario.id}} </label>
-        <label> {{funcionario.nomeCompleto}} </label>
-        <label> {{funcionario.nomeMae}} </label>
+        <div>
+            <span class="material-symbols-outlined">
+                person
+            </span>
+            <label> {{funcionario.id}} </label>
+        </div>
+        <div class="infoCards">
+            <div class="camposLabel">
+                <label>NOME: </label>
+                <label>NOME MÃE: </label>
+            </div>
+            <div class="camposDados">
+                <label> {{funcionario.nomeCompleto}} </label>
+                <label> {{funcionario.nomeMae}} </label>
+            </div>
+        </div>
         <button class="btn" (click)="editaFuncionario(funcionario)">Editar</button>
         <button class="btn" (click)="delFuncionario(funcionario.id)">Deletar</button>
     </div>

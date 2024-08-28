@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { GestaoComponent } from './pages/gestao/gestao.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,15 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    BaseChartDirective,
   ],
   providers: [
     HttpClient,
     provideHttpClient(withFetch()),
     provideClientHydration(),
+    provideCharts(withDefaultRegisterables()),
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
