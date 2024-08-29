@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { BaseChartDirective } from 'ng2-charts';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import Chart, { Colors, Legend } from 'chart.js/auto';
 
 @Component({
   selector: 'app-gestao',
@@ -7,55 +7,47 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrl: './gestao.component.scss',
 
 })
-export class GestaoComponent {
 
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+export class GestaoComponent implements OnInit {
 
-  public someAction(): void {
-    this.chart?.toBase64Image();
+  constructor() { }
+
+  @ViewChild('meuGrafico', { static: true }) elemento: ElementRef | undefined;
+
+  funcionariosAtivos = 3
+  funcionariosDesligados = 1
+  funcionarioFerias = 2
+
+
+
+  ngOnInit() {
+    this.grafico(this.elemento?.nativeElement,)
   }
 
-  // Dados do gráfico
-  public barChartData = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+  grafico(elemento: any) {
 
-  // Rótulos do eixo X
-  public barChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    const labels = ['Funcionários Ativos', 'Funcionários Desligados', 'Funcionarios de Férias'];
 
-  // Tipo de gráfico
-  public barChartType = 'pie';
-
-  // Opções de personalização
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-
-  // Cores do gráfico (opcional)
-  public barChartColors = [
-    {
-      backgroundColor: 'rgba(255,255,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      borderWidth: 1
-    },
-    {
-      backgroundColor: 'rgba(54,162,235,0.2)',
-      borderColor: 'rgba(54,162,235,1)',
-      borderWidth: 1
-    }
-  ];
-
-  // Legenda
-  public barChartLegend = true;
-
-  ngOnInit() { }
-
+    new Chart(elemento, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: [this.funcionariosAtivos, this.funcionariosDesligados, this.funcionarioFerias],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(75, 192, 192)',
+              'rgb(255, 99, 132)',
+              'rgb(201, 203, 207)'
+            ]
+          },
+        ],
+      },
+    });
+  }
 }
-
-
-
-
-
-
