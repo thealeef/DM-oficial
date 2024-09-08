@@ -6,12 +6,10 @@ import * as echarts from 'echarts';
   selector: 'app-gestao',
   templateUrl: './gestao.component.html',
   styleUrl: './gestao.component.scss',
-
 })
 
 export class GestaoComponent {
   isBrowser: boolean | undefined;
-  values: any;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -20,19 +18,16 @@ export class GestaoComponent {
 
   funcionariosAtivos: any = 12
   funcionariosDesligados: any = 3
-  funcionariosFerias: any = 3
+  funcionariosFerias: any = 1
   funcionariosAfastados: any = 2
 
-  legenda = ['Ativos', 'Desligados', 'Férias', 'Afastados']
+  values: any = [this.funcionariosAtivos, this.funcionariosDesligados, this.funcionariosAfastados, this.funcionariosFerias]
+
+  legendas = ['Ativos', 'Desligados', 'Afastados', 'Férias']
 
   ngOnInit() {
 
-    this.values = []
-
-    this.values.push(this.funcionariosAtivos)
-    this.values.push(this.funcionariosDesligados)
-    this.values.push(this.funcionariosFerias)
-    this.values.push(this.funcionariosAfastados)
+    console.log(this.values, this.legendas)
 
     this.isBrowser = typeof window !== 'undefined';
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -73,10 +68,10 @@ export class GestaoComponent {
               show: false
             },
             data: [
-              { value: this.values[0], name: this.legenda[0] },
-              { value: this.values[1], name: this.legenda[1] },
-              { value: this.values[3], name: this.legenda[3] },
-              { value: this.values[4], name: this.legenda[4] },
+              { value: this.values[0], name: this.legendas[0] },
+              { value: this.values[1], name: this.legendas[1] },
+              { value: this.values[2], name: this.legendas[2] },
+              { value: this.values[3], name: this.legendas[3] },
             ]
           }
         ]
