@@ -9,8 +9,9 @@ import { HttpClient } from '@angular/common/http';
 import { SobreComponent } from './pages/sobre/sobre.component';
 import { GestaoComponent } from './pages/gestao/gestao.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { NgxEchartsModule, NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
-import * as echarts from 'echarts';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 @NgModule({
   declarations: [
@@ -21,19 +22,18 @@ import * as echarts from 'echarts';
     GestaoComponent
   ],
   imports: [
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts'),
-    }),
-    NgxEchartsModule.forRoot({ echarts }),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') })
   ],
   providers: [
+    provideCharts(withDefaultRegisterables()),
     HttpClient,
     provideHttpClient(withFetch()),
     provideClientHydration(),
+    provideCharts(withDefaultRegisterables()),
   ],
 
   bootstrap: [AppComponent]

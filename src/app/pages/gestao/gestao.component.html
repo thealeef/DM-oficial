@@ -1,5 +1,2 @@
-<div>
-    <canvas #meuGrafico></canvas>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div *ngIf="isBrowser" echarts [options]="pieChartOptions" class="echart-container"></div>
+<div *ngIf="isBrowser" echarts [options]="lineChartOption" class="echart-container"></div>
