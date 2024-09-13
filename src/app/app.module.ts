@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { FuncionariosComponent } from './pages/funcionarios/funcionarios.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,6 +10,9 @@ import { GestaoComponent } from './pages/gestao/gestao.component';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppComponent } from './app.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') })
   ],
   providers: [
+    provideAnimations(),
     provideCharts(withDefaultRegisterables()),
     HttpClient,
     provideHttpClient(withFetch()),
@@ -37,6 +40,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
   ],
 
   bootstrap: [AppComponent]
+
+
 })
 export class AppModule { }
 

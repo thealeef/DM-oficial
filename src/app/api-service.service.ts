@@ -25,7 +25,6 @@ export class ApiServiceService {
 
   // Método POST para adicionar um funcionário
   addFuncionario(funcionario: any): Observable<any> {
-    console.log(funcionario)
     const url = `${this.apiUrl}`;
     return this.http.post<any>(url, funcionario);
   }

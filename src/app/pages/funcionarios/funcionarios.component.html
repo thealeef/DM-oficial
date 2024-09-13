@@ -5,24 +5,32 @@
 </div>
 <div *ngIf="cardsBoleana" class="containers" id="cards">
     <div *ngFor="let funcionario of funcionarios" id="card" class="card">
-        <div>
+        <div class="icon">
             <span class="material-symbols-outlined">
                 person
             </span>
-            <label> {{funcionario.id}} </label>
+            <label id="id"> {{funcionario.id}} </label>
         </div>
-        <div class="infoCards">
-            <div class="camposLabel">
-                <label>NOME: </label>
-                <label>NOME MÃE: </label>
-            </div>
-            <div class="camposDados">
-                <label> {{funcionario.nomeCompleto}} </label>
-                <label> {{funcionario.nomeMae}} </label>
+        <div>
+            <div class="infoCards">
+                <div class="camposLabel">
+                    <label class="linha">STATUS: </label>
+                    <label class="linha">NOME: </label>
+                    <label class="linha">MÃE: </label>
+                    <label class="linha">CARGO: </label>
+                </div>
+                <div class="camposDados">
+                    <label class="linha"> {{funcionario.status}} </label>
+                    <label class="linha"> {{funcionario.nomeCompleto}} </label>
+                    <label class="linha"> {{funcionario.nomeMae}} </label>
+                    <label class="linha"> {{funcionario.cargo}} </label>
+                </div>
             </div>
         </div>
-        <button class="btn" (click)="editaFuncionario(funcionario)">Editar</button>
-        <button class="btn" (click)="delFuncionario(funcionario.id)">Deletar</button>
+        <div class="classBtn">
+            <button class="btn" (click)="editaFuncionario(funcionario)">Editar</button>
+            <button class="btn" (click)="delFuncionario(funcionario.id)">Deletar</button>
+        </div>
     </div>
 </div>
 <div *ngIf="criarCadastroBoleana" class="cadastro">
@@ -30,12 +38,16 @@
     <div class="formularios">
         <form [formGroup]="funcionarioForm" class="formulario">
             <div class="campos">
+                <label class="campo">Status</label>
                 <label class="campo">Nome Completo</label>
                 <label class="campo">Nome da Mãe</label>
+                <label class="campo">Cargo</label>
             </div>
             <div class="camposInput">
+                <input class="campo" type="text" formControlName="status" placeholder="Insira o Status">
                 <input class="campo" type="text" formControlName="nomeCompleto" placeholder="Insira o Nome Completo">
                 <input class="campo" type="text" formControlName="nomeMae" placeholder="Insira o Nome da Mãe">
+                <input class="campo" type="text" formControlName="cargo" placeholder="Insira o Cargo">
             </div>
         </form>
     </div>
@@ -51,12 +63,16 @@
     <div class="formularios">
         <form [formGroup]="funcionarioForm" class="formulario">
             <div class="campos">
+                <label class="campo">Status</label>
                 <label class="campo">Nome Completo</label>
                 <label class="campo">Nome da Mãe</label>
+                <label class="campo">Cargo</label>
             </div>
             <div class="camposInput">
+                <input class="campo" type="text" formControlName="status" placeholder="Insira o Status">
                 <input class="campo" type="text" formControlName="nomeCompleto" placeholder="Insira o Nome Completo">
                 <input class="campo" type="text" formControlName="nomeMae" placeholder="Insira o Nome da Mãe">
+                <input class="campo" type="text" formControlName="cargo" placeholder="Insira o Cargo">
             </div>
         </form>
     </div>

@@ -7,9 +7,7 @@ import { AppComponent } from './app/app.component';
 import { BarController, Colors, Legend } from 'chart.js';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
-platformBrowserDynamic().bootstrapModule(AppModule, {
-  ngZoneEventCoalescing: true
-})
+platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 
 bootstrapApplication(AppComponent, {

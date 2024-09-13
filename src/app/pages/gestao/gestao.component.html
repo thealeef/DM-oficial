@@ -1,2 +1,9 @@
-<div *ngIf="isBrowser" echarts [options]="pieChartOptions" class="echart-container"></div>
-<div *ngIf="isBrowser" echarts [options]="lineChartOption" class="echart-container"></div>
+<div class="graficos">
+    <div class="graficos-sub">
+        <div *ngIf="isBrowser" echarts [options]="pieChartOptions" class="echart-pie"></div>
+        <div *ngIf="isBrowser" echarts [options]="barChartOptions" class="echart-bar"></div>
+    </div>
+    <div class="grafico-linha">
+        <div *ngIf="isBrowser" echarts [options]="lineChartOptions" class="echart-line"></div>
+    </div>
+</div>

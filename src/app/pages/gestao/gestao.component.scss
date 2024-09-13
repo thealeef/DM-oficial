@@ -1,4 +1,28 @@
-.echart-container {
+.echart-pie {
+    width: 45%;
+    height: 300px;
+}
+
+.echart-bar {
+    width: 45%;
+    height: 300px;
+}
+
+.echart-line {
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    padding: 10px;
     width: 100%;
-    height: 400px;
+    height: 300px;
+}
+
+.graficos-sub {
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+
 }

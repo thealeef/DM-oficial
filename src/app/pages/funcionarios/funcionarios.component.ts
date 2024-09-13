@@ -23,7 +23,7 @@ export class FuncionariosComponent implements OnInit {
 
   respDeletaCadastroBoleana = false;
 
-  constructor(private service: ApiServiceService, private router: Router) { };
+  constructor(private service: ApiServiceService) { };
 
   ngOnInit() {
 
@@ -33,8 +33,10 @@ export class FuncionariosComponent implements OnInit {
 
     //Montando o Form ao iniciar porque se não gera erro
     this.funcionarioForm = new FormGroup({
+      status: new FormControl('', [Validators.required]),
       nomeCompleto: new FormControl('', [Validators.required]),
-      nomeMae: new FormControl('', [Validators.required])
+      nomeMae: new FormControl('', [Validators.required]),
+      cargo: new FormControl('', [Validators.required])
     })
   }
 
@@ -43,6 +45,28 @@ export class FuncionariosComponent implements OnInit {
     this.service.chamaFuncionarios().subscribe({
       next: (data) => this.funcionarios = data //Atualiza a lista de funcionários
     });
+
+    for (let x in this.funcionarios) {
+      console.log(x)
+      console.log(this.funcionarios[x].status)
+
+      if (this.funcionarios[x].status == 0) {
+        this.funcionarios[x].status = 'Desligado'
+      }
+
+      if (this.funcionarios[x].status == 1) {
+        this.funcionarios[x].status = 'Ativo'
+      }
+
+      if (this.funcionarios[x].status == 2) {
+        this.funcionarios[x].status = 'Afastado'
+      }
+
+      if (this.funcionarios[x].status == 3) {
+        this.funcionarios[x].status = 'Férias'
+      }
+
+    }
   }
 
   //Adiciona funcionário 
@@ -54,7 +78,10 @@ export class FuncionariosComponent implements OnInit {
         alert('Funcionario cadastrado com sucesso!') //Mensagem de sucesso
 
         this.criarCadastroBoleana = false
+        this.cardsBoleana = true
+
         this.funcionarioForm.reset();  // Reseta o formulário
+        this.carregaFuncionarios()
       }
     });
   }
@@ -70,8 +97,10 @@ export class FuncionariosComponent implements OnInit {
     //Montando o Form com as infos do funcionário
     this.funcionarioForm = new FormGroup({
       id: new FormControl(funcionario["id"], [Validators.required]),
+      status: new FormControl(funcionario["status"], [Validators.required]),
       nomeCompleto: new FormControl(funcionario["nomeCompleto"], [Validators.required]),
-      nomeMae: new FormControl(funcionario["nomeMae"], [Validators.required])
+      nomeMae: new FormControl(funcionario["nomeMae"], [Validators.required]),
+      cargo: new FormControl(funcionario["cargo"], [Validators.required]),
     })
   }
 
