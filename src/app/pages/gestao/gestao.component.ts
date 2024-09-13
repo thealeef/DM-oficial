@@ -2,6 +2,7 @@ import { isPlatformBrowser } from "@angular/common";
 import { Component, Inject, PLATFORM_ID } from "@angular/core";
 import * as echarts from 'echarts';
 import { ApiServiceService } from "../../api-service.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-gestao',
@@ -12,7 +13,11 @@ import { ApiServiceService } from "../../api-service.service";
 export class GestaoComponent {
   isBrowser: boolean | undefined;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private service: ApiServiceService) { };
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private service: ApiServiceService,
+    private router: Router
+  ) { };
 
   funcionarios: any[] = [];
 
@@ -45,6 +50,7 @@ export class GestaoComponent {
   ]
 
   ngOnInit() {
+    this.refreshComponent()
 
     this.isBrowser = typeof window !== 'undefined';
     this.isBrowser = isPlatformBrowser(this.platformId);
@@ -251,6 +257,12 @@ export class GestaoComponent {
       }
 
     }
+  }
+
+  refreshComponent() {
+    this.router.navigateByUrl('/gestao', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });
   }
 }
 
