@@ -1,10 +1,10 @@
 .echart-pie {
-    width: 45%;
+    width: 50%;
     height: 300px;
 }
 
 .echart-bar {
-    width: 45%;
+    width: 50%;
     height: 300px;
 }
 
@@ -13,7 +13,6 @@
     border-radius: 5px;
     margin: 10px 0 10px 0;
     padding: 10px;
-    width: 100%;
     height: 300px;
 }
 
@@ -25,4 +24,27 @@
     display: flex;
     justify-content: space-around;
 
+}
+
+// Resolução Celular
+@media (max-width: 600px) {
+    .graficos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .graficos-sub {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .echart-pie {
+        width: 100%;
+        height: 200px;
+    }
+
+    .echart-bar {
+        width: 100%;
+        height: 300px;
+    }
 }

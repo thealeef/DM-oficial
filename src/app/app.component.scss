@@ -1,5 +1,5 @@
 * {
-    margin: 5px;
+    margin: 0.5%;
 }
 
 a {
@@ -7,17 +7,20 @@ a {
     font-weight: bold;
     color: black;
     transition: all 1s;
+    font-size: 80%;
 }
 
 .itensMenu {
     display: flex;
     height: 30px;
+    margin-right: 10px;
 }
 
 .itensMenu:hover {
     background-color: #cdcdcd;
     transition: all 0.5s;
     margin: 0;
+    margin-right: 10px;
     height: 55px;
 }
 
@@ -35,4 +38,10 @@ a {
 .rotasMenu {
     display: flex;
     justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+    * {
+        background-color: white;
+    }
 }
