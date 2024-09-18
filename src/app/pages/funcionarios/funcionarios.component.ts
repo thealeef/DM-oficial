@@ -47,8 +47,6 @@ export class FuncionariosComponent implements OnInit {
     });
 
     for (let x in this.funcionarios) {
-      console.log(x)
-      console.log(this.funcionarios[x].status)
 
       if (this.funcionarios[x].status == 0) {
         this.funcionarios[x].status = 'Desligado'
