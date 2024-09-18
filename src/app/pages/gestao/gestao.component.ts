@@ -35,15 +35,15 @@ export class GestaoComponent {
 
     this.carregaFuncionarios()
 
-    //if (this.isBrowser) {
+    if (this.isBrowser) {
 
-    this.graficoPizza()
+      this.graficoPizza()
 
-    this.graficoLinha()
+      this.graficoLinha()
 
-    this.graficoBarra()
+      this.graficoBarra()
 
-    //}
+    }
   }
 
   carregaFuncionarios() {
