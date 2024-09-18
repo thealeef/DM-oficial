@@ -2,6 +2,7 @@ import { Component, Inject, PLATFORM_ID } from "@angular/core";
 import { ApiServiceService } from "../../api-service.service";
 import { Router } from "@angular/router";
 import { registerTheme } from "echarts";
+import { isPlatformBrowser } from "@angular/common";
 
 @Component({
   selector: 'app-gestao',
@@ -28,6 +29,7 @@ export class GestaoComponent {
   ngOnInit() {
 
     this.isBrowser = typeof window !== 'undefined';
+    this.isBrowser = isPlatformBrowser(this.platformId);
 
     for (let x in this.funcionarios) {
       this.nomesFuncionarios.push(this.funcionarios[x].nomeCompleto)
